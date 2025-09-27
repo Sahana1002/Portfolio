@@ -1,235 +1,528 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sahana S — Portfolio</title>
-  <style>
-    :root{
-      --accent: #5b6cff;
-      --muted: #6b7280;
-      --bg: #f0f4ff;
-      --card: #ffffff;
-      color-scheme: light;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;background:linear-gradient(180deg,#e6ebfa 0%, #f0f4ff 60%);font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;color:#1a1a1a}
-    .container{max-width:1100px;margin:32px auto;padding:24px}
-    header{display:flex;gap:20px;align-items:center}
-    .avatar{
-      width:150px;height:150px;border-radius:18px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#d7dcf7 0%, #cbd2f3 100%);border:1px solid rgba(0,0,0,0.08);flex-shrink:0
-    }
-    .hero{flex:1}
-    h1{margin:0;font-size:2.1rem}
-    .tagline{color:var(--muted);margin-top:6px}
-    nav{margin-top:18px;display:flex;gap:12px;flex-wrap:wrap}
-    .pill{background:rgba(0,0,0,0.05);padding:8px 12px;border-radius:999px;font-size:0.9rem;color:var(--muted)}
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sahana S — Portfolio</title>
+    <style>
+      .upload-box {
+        text-align: center;
+      }
 
-    main{display:grid;grid-template-columns:1fr 340px;gap:28px;margin-top:28px;}
-    @media (max-width:980px){main{grid-template-columns:1fr;}
-      header{flex-direction:row}
-      .avatar{width:120px;height:120px}
-      .container{padding:16px}
-    }
+      .profile-pic {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: #ddd;
+        display: block;
+        margin: 10px auto;
+        object-fit: cover;
+      }
 
-    section.card{background:#ffffff;padding:18px;border-radius:14px;border:1px solid rgba(0,0,0,0.05);margin-bottom:18px}
-    .section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-    .small{color:var(--muted);font-size:0.9rem}
+      input[type="file"] {
+        margin-top: 10px;
+      }
+      :root {
+        --accent: #5b6cff;
+        --muted: #6b7280;
+        --bg: #f0f4ff;
+        --card: #ffffff;
+        color-scheme: light;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        background: linear-gradient(180deg, #e6ebfa 0%, #f0f4ff 60%);
+        font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial;
+        color: #1a1a1a;
+      }
+      .container {
+        max-width: 1100px;
+        margin: 32px auto;
+        padding: 24px;
+      }
+      header {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+      }
+      .avatar {
+        width: 150px;
+        height: 150px;
+        border-radius: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #d7dcf7 0%, #cbd2f3 100%);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        flex-shrink: 0;
+      }
+      .hero {
+        flex: 1;
+      }
+      h1 {
+        margin: 0;
+        font-size: 2.1rem;
+      }
+      .tagline {
+        color: var(--muted);
+        margin-top: 6px;
+      }
+      nav {
+        margin-top: 18px;
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .pill {
+        background: rgba(0, 0, 0, 0.05);
+        padding: 8px 12px;
+        border-radius: 999px;
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
 
-    .skills{display:flex;flex-wrap:wrap;gap:8px}
-    .skill{background:rgba(91,108,255,0.12);padding:8px 10px;border-radius:8px;font-weight:600;font-size:0.9rem;color:var(--accent)}
+      main {
+        display: grid;
+        grid-template-columns: 1fr 340px;
+        gap: 28px;
+        margin-top: 28px;
+      }
+      @media (max-width: 980px) {
+        main {
+          grid-template-columns: 1fr;
+        }
+        header {
+          flex-direction: row;
+        }
+        .avatar {
+          width: 120px;
+          height: 120px;
+        }
+        .container {
+          padding: 16px;
+        }
+      }
 
-    .projects{display:grid;gap:12px}
-    .project{padding:12px;border-radius:10px;background:#f9f9ff;border:1px solid rgba(0,0,0,0.05)}
-    .project h4{margin:0 0 6px 0}
-    .meta{color:var(--muted);font-size:0.85rem}
+      section.card {
+        background: #ffffff;
+        padding: 18px;
+        border-radius: 14px;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        margin-bottom: 18px;
+      }
+      .section-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+      .small {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
 
-    .right .info-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
-    .badge{background:rgba(0,0,0,0.05);padding:6px 8px;border-radius:8px;font-size:0.85rem}
+      .skills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .skill {
+        background: rgba(91, 108, 255, 0.12);
+        padding: 8px 10px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: var(--accent);
+      }
 
-    footer{margin-top:48px;text-align:center;color:var(--muted);font-size:0.9rem;padding-bottom:48px}
+      .projects {
+        display: grid;
+        gap: 12px;
+      }
+      .project {
+        padding: 12px;
+        border-radius: 10px;
+        background: #f9f9ff;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+      }
+      .project h4 {
+        margin: 0 0 6px 0;
+      }
+      .meta {
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
 
-    a.cta{display:inline-block;padding:10px 14px;border-radius:10px;background:var(--accent);color:white;text-decoration:none;font-weight:700}
+      .right .info-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+      .badge {
+        background: rgba(0, 0, 0, 0.05);
+        padding: 6px 8px;
+        border-radius: 8px;
+        font-size: 0.85rem;
+      }
 
-    .timeline{display:flex;flex-direction:column;gap:12px}
-    .timeline-item{display:flex;gap:12px}
-    .timeline-item .dot{width:10px;height:10px;border-radius:10px;background:var(--accent);margin-top:6px}
-    .timeline-item .content{flex:1}
+      footer {
+        margin-top: 48px;
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.9rem;
+        padding-bottom: 48px;
+      }
 
-    .contact-list{display:flex;flex-direction:column;gap:8px}
-    .contact-list a{color:inherit;text-decoration:none}
+      a.cta {
+        display: inline-block;
+        padding: 10px 14px;
+        border-radius: 10px;
+        background: var(--accent);
+        color: white;
+        text-decoration: none;
+        font-weight: 700;
+      }
 
-    .hobbies-list{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
-    .hobby{background:rgba(0,0,0,0.05);padding:10px 14px;border-radius:10px;font-size:0.9rem}
+      .timeline {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .timeline-item {
+        display: flex;
+        gap: 12px;
+      }
+      .timeline-item .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 10px;
+        background: var(--accent);
+        margin-top: 6px;
+      }
+      .timeline-item .content {
+        flex: 1;
+      }
 
-    .testimonial{padding:12px;border-left:4px solid var(--accent);background:#f5f6ff;border-radius:8px}
+      .contact-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .contact-list a {
+        color: inherit;
+        text-decoration: none;
+      }
 
-    .achievements ul{margin:0;padding-left:18px}
-    .achievements li{margin-bottom:6px}
+      .hobbies-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 8px;
+      }
+      .hobby {
+        background: rgba(0, 0, 0, 0.05);
+        padding: 10px 14px;
+        border-radius: 10px;
+        font-size: 0.9rem;
+      }
 
-  </style>
-</head>
-<body>
-  <div class="container">
-    <header>
-      <div class="avatar" id="avatar">
-        <svg width="96" height="96" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="24" height="24" rx="4" fill="#cbd2f3"/>
-          <path d="M12 12c1.933 0 3.5-1.567 3.5-3.5S13.933 5 12 5 8.5 6.567 8.5 8.5 10.067 12 12 12z" fill="#5b6cff" opacity="0.95"/>
-          <path d="M4 19c0-2.761 4.477-5 8-5s8 2.239 8 5v.5H4V19z" fill="#5b6cff" opacity="0.18"/>
-        </svg>
-      </div>
+      .testimonial {
+        padding: 12px;
+        border-left: 4px solid var(--accent);
+        background: #f5f6ff;
+        border-radius: 8px;
+      }
 
-      <div class="hero">
-        <h1>Sahana S</h1>
-        <div class="tagline">AI & Data Science undergraduate — building practical ML systems & frontend experiences</div>
-        <div class="tools">
-  <button class="btn" onclick="window.print()">Export PDF</button>
-  <button class="btn secondary" onclick="downloadHTML()">Download HTML</button>
-  <a href="Sahana_Resume.pdf" download class="btn">Download Resume</a>
-</div>
-        <nav>
-          <div class="pill">B.Tech AI & Data Science — St. Joseph’s Institute of Technology</div>
-          <div class="pill">CGPA: 8.75</div>
-          <div class="pill">Open to internships • AI / ML / Full Stack</div>
-        </nav>
-      </div>
-    </header>
+      .achievements ul {
+        margin: 0;
+        padding-left: 18px;
+      }
+      .achievements li {
+        margin-bottom: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="upload-box">
+          <img
+            src="C:\Users\sahan\OneDrive\Desktop\Full Stack\portofolio\sah.jpg"
+            alt="Profile Preview"
+            class="profile-pic"
+          />
+        </div>
 
-    <main>
-      <div>
-        <section class="card">
-          <div class="section-title"><h3>About</h3><div class="small">AI • Web • ML</div></div>
-          <p class="small">AI and Data Science undergraduate passionate about solving real-world problems through intelligent systems and web technologies. Skilled in Python, deep learning, and frontend development. Seeking internship or junior roles in AI/ML or software development.</p>
-        </section>
+        <div class="hero">
+          <h1>Sahana S</h1>
+          <div class="tagline">
+            AI & Data Science undergraduate — building practical ML systems &
+            frontend experiences
+          </div>
+          <div class="tools">
+            <button class="btn" onclick="window.print()">Export PDF</button>
+            <button class="btn secondary" onclick="downloadHTML()">
+              Download HTML
+            </button>
+            <a href="Sahana_Resume.pdf" download class="btn">Download Resume</a>
+          </div>
+          <nav>
+            <div class="pill">
+              B.Tech AI & Data Science — St. Joseph’s Institute of Technology
+            </div>
+            <div class="pill">CGPA: 8.77</div>
+            <div class="pill">Open to internships • AI / ML / Full Stack</div>
+          </nav>
+        </div>
+      </header>
 
-        <section class="card">
-          <div class="section-title"><h3>Projects</h3><div class="small">Selected work</div></div>
-          <div class="projects" id="projects"></div>
-        </section>
+      <main>
+        <div>
+          <section class="card">
+            <div class="section-title">
+              <h3>About</h3>
+              <div class="small">AI • Web • ML</div>
+            </div>
+            <p class="small">
+              AI and Data Science undergraduate passionate about solving
+              real-world problems through intelligent systems and web
+              technologies. Skilled in Python, deep learning, and frontend
+              development. Seeking internship or junior roles in AI/ML or
+              software development.
+            </p>
+          </section>
 
-        <section class="card">
-          <div class="section-title"><h3>Experience</h3><div class="small">Work & internships</div></div>
-          <div class="timeline">
-            <div class="timeline-item">
-              <div class="dot"></div>
-              <div class="content">
-                <strong>Data Science Intern — Vcodes</strong>
-                <div class="small">Mar 2025 – Jun 2025</div>
-                <div class="small" style="margin-top:6px">Built a Python scraper using Adzuna API for real-time job data. Parsed JSON into Pandas, extracted title/company/salary insights, and classified job titles by demand-level using custom frequency logic.</div>
+          <section class="card">
+            <div class="section-title">
+              <h3>Projects</h3>
+              <div class="small">Selected work</div>
+            </div>
+            <div class="projects" id="projects"></div>
+          </section>
+
+          <section class="card">
+            <div class="section-title">
+              <h3>Experience</h3>
+              <div class="small">Work & internships</div>
+            </div>
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="dot"></div>
+                <div class="content">
+                  <strong>Data Science Intern — Vcodes</strong>
+                  <div class="small">Mar 2025 – Jun 2025</div>
+                  <div class="small" style="margin-top: 6px">
+                    Built a Python scraper using Adzuna API for real-time job
+                    data. Parsed JSON into Pandas, extracted
+                    title/company/salary insights, and classified job titles by
+                    demand-level using custom frequency logic.
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <section class="card achievements">
-          <div class="section-title"><h3>Achievements</h3><div class="small">Highlights</div></div>
-          <ul>
-            <li>Maintained a CGPA of 8.75 while actively working on projects and internships.</li>
-            <li>Completed multiple certifications from Meta, Infosys, and MongoDB.</li>
-            <li>Built end-to-end AI and Web applications demonstrating real-world applicability.</li>
-          </ul>
-        </section>
+          <section class="card achievements">
+            <div class="section-title">
+              <h3>Achievements</h3>
+              <div class="small">Highlights</div>
+            </div>
+            <ul>
+              <li>
+                Maintained a CGPA of 8.75 while actively working on projects and
+                internships.
+              </li>
+              <li>
+                Completed multiple certifications from Meta, Infosys, and
+                MongoDB.
+              </li>
+              <li>
+                Built end-to-end AI and Web applications demonstrating
+                real-world applicability.
+              </li>
+            </ul>
+          </section>
 
-        <section class="card">
-          <div class="section-title"><h3>Testimonials</h3><div class="small">Feedback</div></div>
-          <div class="testimonial">“Sahana is highly adaptable and quick to learn, showing great potential in AI/ML problem-solving.” — Mentor at Vcodes</div>
-        </section>
+          <section class="card">
+            <div class="section-title">
+              <h3>Testimonials</h3>
+              <div class="small">Feedback</div>
+            </div>
+            <div class="testimonial">
+              “Sahana is highly adaptable and quick to learn, showing great
+              potential in AI/ML problem-solving.” — Mentor at Vcodes
+            </div>
+          </section>
 
-        <section class="card">
-          <div class="section-title"><h3>Hobbies</h3><div class="small">Beyond tech</div></div>
-          <div class="hobbies-list">
-            <div class="hobby">📚 Reading Tech Blogs</div>
-            <div class="hobby">🎨 Digital Art</div>
-            <div class="hobby">🎶 Music</div>
-            <div class="hobby">🌍 Exploring AI ethics</div>
-          </div>
-        </section>
+          <section class="card">
+            <div class="section-title">
+              <h3>Hobbies</h3>
+              <div class="small">Beyond tech</div>
+            </div>
+            <div class="hobbies-list">
+              <div class="hobby">📚 Reading Tech Blogs</div>
+              <div class="hobby">🎨 Digital Art</div>
+              <div class="hobby">🎶 Music</div>
+              <div class="hobby">🌍 Exploring AI ethics</div>
+            </div>
+          </section>
 
-        <section class="card">
-          <div class="section-title"><h3>Certifications</h3><div class="small">Professional</div></div>
-          <div style="display:flex;flex-wrap:wrap;gap:8px">
-            <div class="badge">Intro to Front-End Development — Meta (Oct 2023)</div>
-            <div class="badge">Java Programming — Infosys (Nov 2023)</div>
-            <div class="badge">MongoDB for Students (Jun 2024)</div>
-            <div class="badge">Programming with JavaScript — Meta (Jan 2025)</div>
-          </div>
-        </section>
-      </div>
+          <section class="card">
+            <div class="section-title">
+              <h3>Certifications</h3>
+              <div class="small">Professional</div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px">
+              <div class="certificate">
+                <a
+                  href="C:\Users\sahan\OneDrive\Desktop\Full Stack\portofolio\1.jpg"
+                  target="_blank"
+                  >Python Programming Certificate</a
+                >
+              </div>
 
-      <aside class="right">
-        <section class="card">
-          <div class="section-title"><h3>Contact</h3><div class="small">Let's connect</div></div>
-          <div class="contact-list">
-            <a href="mailto:sahanasathish1002@gmail.com">✉️ sahanasathish1002@gmail.com</a>
-            <a href="tel:9361614686">📞 +91 9361614686</a>
-            <a href="https://www.linkedin.com/in/sahana-s-b6a957255/" target="_blank">🔗 LinkedIn</a>
-          </div>
-          <div style="margin-top:12px" class="small">Location: Chennai, Tamil Nadu</div>
-        </section>
+              <div class="certificate">
+                <a
+                  href="C:\Users\sahan\OneDrive\Desktop\Full Stack\portofolio\2.jpg"
+                  target="_blank"
+                  >Introduction to MongoDB for Students</a
+                >
+              </div>
 
-        <section class="card">
-          <div class="section-title"><h3>Skills</h3><div class="small">Technical & tools</div></div>
-          <div class="skills">
-            <div class="skill">Python</div>
-            <div class="skill">Java</div>
-            <div class="skill">HTML</div>
-            <div class="skill">CSS</div>
-            <div class="skill">JavaScript</div>
-            <div class="skill">NumPy</div>
-            <div class="skill">Pandas</div>
-            <div class="skill">TensorFlow</div>
-            <div class="skill">Matplotlib</div>
-            <div class="skill">MySQL</div>
-          </div>
-        </section>
+              <div class="certificate">
+                <a
+                  href="C:\Users\sahan\OneDrive\Desktop\Full Stack\portofolio\3.jpg"
+                  target="_blank"
+                  >Introduction to Front_End Development</a
+                >
+              </div>
 
-        <section class="card">
-          <div class="section-title"><h3>Education</h3><div class="small">Academic</div></div>
-          <div><strong>St. Joseph's Institute of Technology</strong></div>
-          <div class="small">B.Tech — Artificial Intelligence and Data Science (2022 – 2026)</div>
-          <div class="small" style="margin-top:6px">CGPA: 8.75 (till 5th sem)</div>
-        </section>
-      </aside>
-    </main>
+              <div class="certificate">
+                <a
+                  href="C:\Users\sahan\OneDrive\Desktop\Full Stack\portofolio\4.0.jpg"
+                  target="_blank"
+                  >Java Programming 2022</a
+                >
+              </div>
+            </div>
+          </section>
+        </div>
 
-    <footer>
-      <div>Want this site as a single HTML file you can host anywhere? Click the download button below.</div>
-      <div style="margin-top:12px"><a class="cta" id="downloadBtn">Download HTML</a></div>
-    </footer>
-  </div>
+        <aside class="right">
+          <section class="card">
+            <div class="section-title">
+              <h3>Contact</h3>
+              <div class="small">Let's connect</div>
+            </div>
+            <div class="contact-list">
+              <a href="mailto:sahanasathish1002@gmail.com"
+                >✉️ sahanasathish1002@gmail.com</a
+              >
+              <a href="tel:9361614686">📞 +91 9361614686</a>
+              <a
+                href="https://www.linkedin.com/in/sahana-s-b6a957255/"
+                target="_blank"
+                >🔗 LinkedIn</a
+              >
+            </div>
+            <div style="margin-top: 12px" class="small">
+              Location: Chennai, Tamil Nadu
+            </div>
+          </section>
 
-  <script>
-    const projects = [
-      {
-        title: 'Voice Gender Classification (RNN)',
-        tech: 'Python, TensorFlow',
-        desc: 'Built a Simple RNN to classify speaker gender using frequency-based features (jitter, shimmer, harmonics). Preprocessed and reshaped sequential features and built a prediction wrapper for new voice inputs.'
-      },
-      {
-        title: 'Text-to-Voice Converter',
-        tech: 'JavaScript, Web Speech API',
-        desc: 'Browser-based TTS with dynamic voice selection and pitch/rate controls for customizable speech synthesis.'
-      },
-      {
-        title: 'Form Validation (Vanilla JS)',
-        tech: 'JavaScript, HTML, CSS',
-        desc: 'Client-side form validation using RegEx for email/phone/password; dynamic error messages and prevention of invalid submissions.'
-      }
-    ];
+          <section class="card">
+            <div class="section-title">
+              <h3>Skills</h3>
+              <div class="small">Technical & tools</div>
+            </div>
+            <div class="skills">
+              <div class="skill">Python</div>
+              <div class="skill">Java</div>
+              <div class="skill">HTML</div>
+              <div class="skill">CSS</div>
+              <div class="skill">JavaScript</div>
+              <div class="skill">NumPy</div>
+              <div class="skill">Pandas</div>
+              <div class="skill">TensorFlow</div>
+              <div class="skill">Matplotlib</div>
+              <div class="skill">MySQL</div>
+            </div>
+          </section>
 
-    const container = document.getElementById('projects');
-    projects.forEach(p => {
-      const el = document.createElement('div'); el.className='project';
-      el.innerHTML = `<h4>${p.title}</h4><div class=\"meta\">${p.tech}</div><p class=\"small\" style=\"margin-top:8px\">${p.desc}</p>`;
-      container.appendChild(el);
-    });
+          <section class="card">
+            <div class="section-title">
+              <h3>Education</h3>
+              <div class="small">Academic</div>
+            </div>
+            <div><strong>St. Joseph's Institute of Technology</strong></div>
+            <div class="small">
+              B.Tech — Artificial Intelligence and Data Science (2022 – 2026)
+            </div>
+            <div class="small" style="margin-top: 6px">
+              CGPA: 8.75 (till 5th sem)
+            </div>
+          </section>
+        </aside>
+      </main>
 
-    document.getElementById('downloadBtn').addEventListener('click', ()=>{
-      const blob = new Blob([document.documentElement.outerHTML], {type:'text/html'});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a'); a.href = url; a.download = 'sahana_portfolio.html'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
-    });
-  </script>
-</body>
+      <footer>
+        <div>
+          Want this site as a single HTML file you can host anywhere? Click the
+          download button below.
+        </div>
+        <div style="margin-top: 12px">
+          <a class="cta" id="downloadBtn">Download HTML</a>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      const projects = [
+        {
+          title: "Voice Gender Classification (RNN)",
+          tech: "Python, TensorFlow",
+          desc: "Built a Simple RNN to classify speaker gender using frequency-based features (jitter, shimmer, harmonics). Preprocessed and reshaped sequential features and built a prediction wrapper for new voice inputs.",
+        },
+        {
+          title: "Text-to-Voice Converter",
+          tech: "JavaScript, Web Speech API",
+          desc: "Browser-based TTS with dynamic voice selection and pitch/rate controls for customizable speech synthesis.",
+        },
+        {
+          title: "Form Validation (Vanilla JS)",
+          tech: "JavaScript, HTML, CSS",
+          desc: "Client-side form validation using RegEx for email/phone/password; dynamic error messages and prevention of invalid submissions.",
+        },
+      ];
+
+      const container = document.getElementById("projects");
+      projects.forEach((p) => {
+        const el = document.createElement("div");
+        el.className = "project";
+        el.innerHTML = `<h4>${p.title}</h4><div class=\"meta\">${p.tech}</div><p class=\"small\" style=\"margin-top:8px\">${p.desc}</p>`;
+        container.appendChild(el);
+      });
+
+      document.getElementById("downloadBtn").addEventListener("click", () => {
+        const blob = new Blob([document.documentElement.outerHTML], {
+          type: "text/html",
+        });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "sahana_portfolio.html";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+      });
+    </script>
+  </body>
 </html>
